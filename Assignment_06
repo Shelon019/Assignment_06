@@ -1,0 +1,85 @@
+# Assignment_06
+
+import 'package:flutter/material.dart';
+import 'package:project_61a/single_item_page.dart';
+
+class GridviewPage extends StatelessWidget {
+  const GridviewPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var myItems = [
+      {
+        "img":
+            "https://upload.wikimedia.org/wikipedia/commons/d/d5/AJS_350_7R_of_1962_-_Gruber_Museum_-_Weiler_i.A.%2C_Bavaria%2C_Germany.jpg",
+        "title": "Cafe Racer",
+      },
+      {
+        "img":
+            "https://upload.wikimedia.org/wikipedia/commons/5/5d/Ducati-Panigale-V4-clarkintlspeedwayph-californiasuperbike-trackday-7285-2025.jpg",
+        "title": "Sports Bike",
+      },
+      {
+        "img":
+            "https://upload.wikimedia.org/wikipedia/commons/d/da/Yamaha_Vmax_motorbike_cropped.jpg",
+        "title": "Cruiser Bike",
+      },
+      {
+        "img":
+            "https://upload.wikimedia.org/wikipedia/commons/2/24/DumontDunes_2005-04-25_paddle-tire.jpg",
+        "title": "Off-Road bike",
+      },
+      {
+        "img":
+            "https://upload.wikimedia.org/wikipedia/commons/0/00/BMW_1200_GS_right_side_view.jpg",
+        "title": "Dual Purpose bike",
+      },
+    ];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("GridView"),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemCount: myItems.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SingleItemPage(
+                    image: myItems[index]['img']!,
+                    title: myItems[index]['title']!,
+                  ),
+                ),
+              );
+            },
+            child: Card(
+              color: Colors.blueGrey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(
+                    myItems[index]['img']!,
+                    width: 120,
+                    height: 120,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    myItems[index]['title']!,
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
